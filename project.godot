@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="AhegaoClickerAuthServer"
+run/main_scene="res://src/scenes/Authenticate.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PlayerData="*res://src/scripts/PlayerData.gd"
 
 [rendering]
 
