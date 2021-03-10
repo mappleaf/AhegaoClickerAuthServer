@@ -6,6 +6,7 @@ var max_servers = 5
 
 
 func _ready() -> void:
+	randomize()
 	StartServer()
 
 
@@ -19,6 +20,8 @@ func StartServer() -> void:
 
 remote func AuthenticatePlayer(username, password, peer_id) -> void:
 	print("Auth request received")
+	
+	var token
 	var gateway_id = get_tree().get_rpc_sender_id()
 	var result
 	
@@ -32,9 +35,13 @@ remote func AuthenticatePlayer(username, password, peer_id) -> void:
 	else:
 		print("Succesful authentication")
 		result = true
+		token = str(randi()).sha256_text() + str(OS.get_unix_time())
+		var gameserver = "GameServer1" # REPLACE WITH THE LOAD BALANCER
+		
+		GameServers.DistributeLoginToken(token, gameserver)
 	
 	print("Authentication result sent to gateway server")
-	rpc_id(gateway_id, "AuthenticationResults", result, peer_id)
+	rpc_id(gateway_id, "AuthenticationResults", result, peer_id, token)
 
 
 func _peer_connected(gateway_id) -> void:

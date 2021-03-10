@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerData="*res://src/scripts/PlayerData.gd"
+GameServers="*res://src/scenes/GameServers.tscn"
 
 [rendering]
 
