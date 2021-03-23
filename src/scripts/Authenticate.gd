@@ -42,7 +42,7 @@ remote func AuthenticatePlayer(username, password, peer_id) -> void:
 			token = str(randi()).sha256_text() + str(OS.get_unix_time())
 			var gameserver = "GameServer1" # REPLACE WITH THE LOAD BALANCER
 			
-			GameServers.DistributeLoginToken(token, gameserver)
+			GameServers.DistributeLoginToken(token, username, gameserver)
 	
 	print("Authentication result sent to gateway server")
 	rpc_id(gateway_id, "AuthenticationResults", result, peer_id, token)

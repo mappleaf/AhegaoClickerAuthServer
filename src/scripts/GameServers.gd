@@ -27,9 +27,9 @@ func StartServer() -> void:
 	network.connect("peer_connected", self, "_peer_connected")
 	network.connect("peer_disconnected", self, "_peer_disconnected")
 
-func DistributeLoginToken(token, gameserver) -> void:
+func DistributeLoginToken(token, username, gameserver) -> void:
 	var gameserver_peer_id = gameserverlist[gameserver]
-	rpc_id(gameserver_peer_id, "RecieveLoginToken", token)
+	rpc_id(gameserver_peer_id, "RecieveLoginToken", token, username)
 
 
 func _peer_connected(gameserver_id) -> void:
